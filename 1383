@@ -1,0 +1,65 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(){
+    int sudoku[9][9], x, i, j, n, k, c=0, l=0, b=0;
+    scanf("%d", &n);
+    for(k=0; k<n; k++){
+        for(i=0; i<9; i++){
+            for(j=0; j<9; j++){
+                scanf("%d", &sudoku[i][j]);
+
+            }
+        }
+    }
+    x=0;
+    while(x!=n){
+    for(k=0; k<9; k++){
+        for(i=0; i<9; i++){
+            for(j=0;j<9;j++){
+                if(i!=j){
+                    if(sudoku[k][i]==sudoku[k][j]){
+                    l=l+1;}
+                }
+            }
+        }
+    }
+    for(k=0; k<9; k++){
+        for(i=0; i<9; i++){
+            for(j=0;j<9;j++){
+                if(i!=j){
+                    if(sudoku[i][k]==sudoku[j][k]){
+                    c=c+1;}
+                }
+            }
+        }
+    }
+    for(i=0;i<=6;i=i+3){
+            for(j=0;j<=6;j=j+3){
+                b= bloco(&sudoku[i][j]);
+            }
+        }
+
+        if(l>0 || c>0 || b>0){
+            printf("Instancia %d\n SIM\n", &x+1);
+        }
+        else{
+            printf("Instancia %d\n NAO\n", &x+1);
+        }
+    x=x+1;
+    }
+    return 0;
+}
+int bloco(int* k){
+    int i,j, b=0;
+    int teste[]={*k, *(k+1),*(k+2),
+                    *(k+9),*(k+10), *(k+11),
+                    *(k+18), *(k+19), *(k+20)};
+    for(i=0;i<9;i++){
+        for(j=0;j<9;j++){
+            if(i!=j && teste[i]== teste[j]){
+                b=b+1;
+            }
+        }
+    }
+    return 1;}
